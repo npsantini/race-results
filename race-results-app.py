@@ -78,11 +78,11 @@ def displayResults(runnerObject):
   text1.insert(tk.INSERT, " ")
   text1.insert(tk.INSERT, '%-30s' % p[0].name)
   text1.insert(tk.INSERT, " ")
-  text1.insert(tk.INSERT, '%-3s' % "Sex")
+  text1.insert(tk.INSERT, '%-3s' % p[0].gender)
   text1.insert(tk.INSERT, " ")
   text1.insert(tk.INSERT, '%6s' % p[0].age)
   text1.insert(tk.INSERT, " ")
-  text1.insert(tk.INSERT, '%-7s' % "Time")
+  text1.insert(tk.INSERT, '%-7s' % p[0].chipTime)
   text1.insert(tk.INSERT, "\n")
   text1.insert(tk.INSERT, "-" * 55)
   text1.insert(tk.INSERT, "\n")
@@ -135,28 +135,31 @@ resultsArea = tk.Frame(root)
 resultsFrame = tk.Frame(resultsArea)
 
 resultsArea.grid(column=0, row=0)
-resultsFrame.grid(column=0, row=0, columnspan=3, rowspan=3)
+resultsFrame.grid(column=0, row=0, columnspan=3, rowspan=4)
+
+title = tk.Label(resultsArea, text="2019 Buffalo Trace 5k Results", font=("Arial", 16))
+title.grid(column=0, row=0, columnspan=2)
 
 btn1 = tk.Button(resultsArea, text="Sort By Name", width=30)
-btn1.grid(column=0, row=0)
+btn1.grid(column=0, row=1)
 
 btn2 = tk.Button(resultsArea, text="Sort By Age", width=30)
-btn2.grid(column=1, row=0)
+btn2.grid(column=1, row=1)
 
 btn3 = tk.Button(resultsArea, text="Sort By Rank", width=30)
-btn3.grid(column=0, row=1)
+btn3.grid(column=0, row=2)
 
 btn4 = tk.Button(resultsArea, text="Sort By Gender", width=30)
-btn4.grid(column=1, row=1)
+btn4.grid(column=1, row=2)
 
 searchField = tk.Entry(resultsArea, width=30)
-searchField.grid(column=0, row=2)
+searchField.grid(column=0, row=3)
 
 btn5 = tk.Button(resultsArea, text="Search by Name", width=30)
-btn5.grid(column=1, row=2)
+btn5.grid(column=1, row=3)
 
 #Display initial list
-text1 = tk.Text(root, height=45, width=55)
+text1 = tk.Text(root, height=40, width=55)
 text1.grid(column=0, row=1)
 
 displayResults(p)
