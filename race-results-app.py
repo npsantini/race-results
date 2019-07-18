@@ -11,6 +11,18 @@ class Person:
     self.gunTime = gunTime
     self.pace = pace
 
+def searchByName(runnerObject, rWidget):
+  #Sort by rank to keep the times in order
+  sortByRank(runnerObject, rWidget)
+  
+  tableHeader = runnerObject[0]
+  del runnerObject[0]
+
+  userSearchTerm = searchField.get()
+  print(userSearchTerm)
+  
+  p.insert(0, tableHeader)
+
 def sortByName(runnerObject, rWidget):
   #Sort by rank to keep the times in order
   sortByRank(runnerObject, rWidget)
@@ -31,6 +43,18 @@ def sortByAge(runnerObject, rWidget):
   del runnerObject[0]
   
   runnerObject.sort(key=lambda x: x.age)
+  rWidget.grid_remove()
+  p.insert(0, tableHeader)
+  displayResults(runnerObject)
+
+def sortByGender(runnerObject, rWidget):
+  #Sort by rank to keep the times in order
+  sortByRank(runnerObject, rWidget)
+  
+  tableHeader = runnerObject[0]
+  del runnerObject[0]
+  
+  runnerObject.sort(key=lambda x: x.gender)
   rWidget.grid_remove()
   p.insert(0, tableHeader)
   displayResults(runnerObject)
@@ -111,16 +135,25 @@ resultsArea = tk.Frame(root)
 resultsFrame = tk.Frame(resultsArea)
 
 resultsArea.grid(column=0, row=0)
-resultsFrame.grid(column=0, row=0, columnspan=3, rowspan=2)
+resultsFrame.grid(column=0, row=0, columnspan=3, rowspan=3)
 
-btn1 = tk.Button(resultsArea, text="Sort By Name", width=20)
+btn1 = tk.Button(resultsArea, text="Sort By Name", width=30)
 btn1.grid(column=0, row=0)
 
-btn2 = tk.Button(resultsArea, text="Sort By Age", width=19)
+btn2 = tk.Button(resultsArea, text="Sort By Age", width=30)
 btn2.grid(column=1, row=0)
 
-btn3 = tk.Button(resultsArea, text="Sort By Rank", width=20)
-btn3.grid(column=2, row=0)
+btn3 = tk.Button(resultsArea, text="Sort By Rank", width=30)
+btn3.grid(column=0, row=1)
+
+btn4 = tk.Button(resultsArea, text="Sort By Gender", width=30)
+btn4.grid(column=1, row=1)
+
+searchField = tk.Entry(resultsArea, width=30)
+searchField.grid(column=0, row=2)
+
+btn5 = tk.Button(resultsArea, text="Search by Name", width=30)
+btn5.grid(column=1, row=2)
 
 #Display initial list
 text1 = tk.Text(root, height=45, width=55)
@@ -133,6 +166,8 @@ displayResults(p)
 btn1['command'] = lambda arg1 = p, arg2 = text1 : sortByName(arg1, arg2)
 btn2['command'] = lambda arg1 = p, arg2 = text1 : sortByAge(arg1, arg2)
 btn3['command'] = lambda arg1 = p, arg2 = text1 : sortByRank(arg1, arg2)
+btn4['command'] = lambda arg1 = p, arg2 = text1 : sortByGender(arg1, arg2)
+btn5['command'] = lambda arg1 = p, arg2 = text1 : searchByName(arg1, arg2)
 
 
 root.mainloop()
